@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_LampSetDirectDALIAdapter" Id="{06500677-1ca5-4f9c-bbca-0dcd0188c3d3}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_LampSetDirectDALIAdapter EXTENDS FB_Lamp
 VAR
@@ -14,10 +14,10 @@ METHOD PUBLIC DimDown
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (fbLampSetDirectDALI.nLightLevel >= 38.1) THEN
-	fbLampSetDirectDALI.SetLightLevel(TO_BYTE(fbLampSetDirectDALI.nLightLevel - 12.7));
+	fbLampSetDirectDALI.SetLightLevel(TO_USINT(fbLampSetDirectDALI.nLightLevel - 12.7));
 END_IF
 IF (_ipObserver <> 0) THEN
-	_ipObserver.Update(TO_BYTE(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
+	_ipObserver.Update(TO_USINT(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
 END_IF
 ]]></ST>
       </Implementation>
@@ -28,10 +28,10 @@ METHOD PUBLIC DimUp
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (fbLampSetDirectDALI.nLightLevel <= 241.3) THEN
-	fbLampSetDirectDALI.SetLightLevel(TO_BYTE(TO_LREAL(fbLampSetDirectDALI.nLightLevel) + 12.7));
+	fbLampSetDirectDALI.SetLightLevel(TO_USINT(TO_LREAL(fbLampSetDirectDALI.nLightLevel) + 12.7));
 END_IF
 IF (_ipObserver <> 0) THEN
-	_ipObserver.Update(TO_BYTE(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
+	_ipObserver.Update(TO_USINT(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
 END_IF
 ]]></ST>
       </Implementation>
@@ -43,7 +43,7 @@ METHOD PUBLIC Off
       <Implementation>
         <ST><![CDATA[fbLampSetDirectDALI.SetLightLevel(0);
 IF (_ipObserver <> 0) THEN
-	_ipObserver.Update(TO_BYTE(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
+	_ipObserver.Update(TO_USINT(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
 END_IF
 ]]></ST>
       </Implementation>
@@ -55,35 +55,10 @@ METHOD PUBLIC On
       <Implementation>
         <ST><![CDATA[fbLampSetDirectDALI.SetLightLevel(254);
 IF (_ipObserver <> 0) THEN
-	_ipObserver.Update(TO_BYTE(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
+	_ipObserver.Update(TO_USINT(fbLampSetDirectDALI.nLightLevel * 100.0 / 254.0));
 END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_LampSetDirectDALIAdapter">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_LampSetDirectDALIAdapter.DimDown">
-      <LineId Id="5" Count="1" />
-      <LineId Id="4" Count="0" />
-      <LineId Id="10" Count="2" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_LampSetDirectDALIAdapter.DimUp">
-      <LineId Id="5" Count="1" />
-      <LineId Id="4" Count="0" />
-      <LineId Id="10" Count="2" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_LampSetDirectDALIAdapter.Off">
-      <LineId Id="4" Count="0" />
-      <LineId Id="8" Count="2" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_LampSetDirectDALIAdapter.On">
-      <LineId Id="4" Count="0" />
-      <LineId Id="8" Count="2" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
