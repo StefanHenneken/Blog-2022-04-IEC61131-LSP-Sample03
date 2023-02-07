@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_LampUpDown" Id="{e5938590-1890-43a0-ba86-32547ab377e2}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_LampUpDown
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_LampUpDown
 VAR
 	nLightLevel			: USINT;
 END_VAR]]></Declaration>
